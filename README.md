@@ -31,10 +31,10 @@ This game will consist of a single screen with the simulation canvas along with 
 ### Implementation Timeline
 
 **Over the weekend:**
-- [ ] Create images for the background, scissors, rocks and papers
-- [ ] Create/gather audio files for sound effects and background music
-- [ ] Setup required files within project folder: HTML and JavaScript
-- [ ] Save images and sounds into project folder
+- [x] Create images for the background, scissors, rocks and papers
+- [x] Create/gather audio files for sound effects and background music
+- [x] Setup required files within project folder: HTML and JavaScript
+- [x] Save images and sounds into project folder
 
 **Day 1:** Implement code to make background scroll from top to bottom, along with generating obstacles (rocks and papers) randomly. Goals for the day:
 - [ ] Learn how to scroll the background and implement a continuous loop for the scroll

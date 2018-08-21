@@ -2,20 +2,30 @@
 <html>
   <head>
       <title>Rock-Paper-Scissors</title>
+      <link rel="stylesheet" type="text/css" href="main.css"/>
       <style type="text/css">
           canvas {
             position: absolute;
             top: 100px;
-            left: 100px;
+            left: 150px;
             background: transparent;
-            border: 1px #D8E7FE;
+            /* border: 1px #D8E7FE; */
           }
       </style>
   </head>
   <body>
-      <canvas id="canvas" width="950" height="600">
+    <img id="rock" src="https://s15.postimg.cc/3wvz6x8bv/rock.png"/>
+    <img id="scissors" src="https://s15.postimg.cc/40psnd10b/scissors.png"/>
+      <canvas id="canvas" width="500" height="600">
         Testing
       </canvas>
-      <script src="game.js"></script>
+      <!-- <canvas id="scissors" width="850" height="490">
+      </canvas>
+      <canvas id="paper" width="850" height="490">
+      </canvas>
+      <canvas id="rock" width="850" height="490">
+      </canvas> -->
+
+      <script src="./dist/javascript/bundle.js"></script>
   </body>
 </html>
