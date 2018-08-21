@@ -1,25 +1,24 @@
 class Rock {
   constructor(ctx) {
+    //create rock here
     this.ctx = ctx;
+    this.pos = {x: Math.random() * 300, y: -56 };
+    this.image = new Image ();
+    this.image.src = "https://s15.postimg.cc/3wvz6x8bv/rock.png";
+    this.speed = 1;
   }
 
   drawRock() {
-    const rockImg = new Image();
-    rockImg.src = "https://s15.postimg.cc/3wvz6x8bv/rock.png";
-    // const rockImg = document.getElementById("rock");
-    // console.log(rockImg);
-    let prevRock = 0;
-
-    for (let i = 0; i < 2; i += 1) {
-      let pos = Math.random() * 300;
-      //checks if previous rock and current rock are touching
-      if (Math.abs(prevRock - pos) > 55) {
-        this.ctx.drawImage(rockImg, pos, 150);
-        prevRock = pos;
-      }
-    }
+    // draws one rock
+    this.ctx.drawImage(this.image, this.pos.x, this.pos.y);
   }
 
+  //adds the speed to the vertical direction of rock to make it move down
+  updateRock() {
+    this.pos.y += this.speed;
+  }
 }
 
 module.exports = Rock;
+
+// link to rock image: https://s15.postimg.cc/3wvz6x8bv/rock.png

@@ -11,3 +11,6 @@ class Scissors {
 }
 
 module.exports = Scissors;
+
+
+//Link to scissors image: https://s15.postimg.cc/40psnd10b/scissors.png
