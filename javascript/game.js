@@ -1,5 +1,6 @@
 const Rock = require('./rock');
 const Scissors = require('./scissors');
+const Paper = require('./paper');
 
 const background = document.getElementById("canvas");
 const ctx = background.getContext("2d");
@@ -33,8 +34,10 @@ class AllObjects {
 window.onload = () => {
   let scissors = new Scissors(ctx);
   let rock = new Rock(ctx);
+  let paper = new Paper(ctx);
     rock.drawRock();
     scissors.drawScissors();
+    paper.drawPaper();
 };
 
 

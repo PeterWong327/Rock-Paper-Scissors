@@ -95,6 +95,7 @@
 
 const Rock = __webpack_require__(/*! ./rock */ "./javascript/rock.js");
 const Scissors = __webpack_require__(/*! ./scissors */ "./javascript/scissors.js");
+const Paper = __webpack_require__(/*! ./paper */ "./javascript/paper.js");
 
 const background = document.getElementById("canvas");
 const ctx = background.getContext("2d");
@@ -128,8 +129,10 @@ class AllObjects {
 window.onload = () => {
   let scissors = new Scissors(ctx);
   let rock = new Rock(ctx);
+  let paper = new Paper(ctx);
     rock.drawRock();
     scissors.drawScissors();
+    paper.drawPaper();
 };
 
 
@@ -150,6 +153,40 @@ window.onload = () => {
 //   }
 //
 // };
+
+
+/***/ }),
+
+/***/ "./javascript/paper.js":
+/*!*****************************!*\
+  !*** ./javascript/paper.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+class Paper {
+  constructor(ctx) {
+    this.ctx = ctx;
+  }
+
+  drawPaper() {
+    const paperImg = new Image();
+    paperImg.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
+
+    let prevPaper = 0;
+
+    for (let i = 0; i < 2; i += 1) {
+      let pos = Math.random() * 300;
+
+      if (Math.abs(prevPaper - pos) > 50) {
+        this.ctx.drawImage(paperImg, pos, 250);
+        prevPaper = pos;
+      }
+    }
+  }
+}
+
+module.exports = Paper;
 
 
 /***/ }),
