@@ -97,10 +97,14 @@ const Rock = __webpack_require__(/*! ./rock */ "./javascript/rock.js");
 const Scissors = __webpack_require__(/*! ./scissors */ "./javascript/scissors.js");
 const Paper = __webpack_require__(/*! ./paper */ "./javascript/paper.js");
 
-const background = document.getElementById("canvas");
-const ctx = background.getContext("2d");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-
+const background = new Image ();
+background.src = "https://s22.postimg.cc/5h3h8fqnl/background.png";
+background.onload = function() {
+  ctx.drawImage(background, 0, 0);
+};
 // Images
 // const images = () => {
 //
@@ -136,22 +140,6 @@ window.onload = () => {
 };
 
 
-// canvas.onload = function(){
-//
-//   ctx.drawImage(background, 0, 0);
-//   ctx.drawImage(scissors, 350, 300);
-//
-//   for (let i = 0; i < 5; i += 1) {
-//     let xRock = Math.random() * canvas.width;
-//     let xPaper = Math.random() * canvas.width;
-//     if (xRock !== xPaper+5) {
-//       ctx.drawImage(rock, xRock, 100);
-//     }
-//     if (xRock !== xPaper+5) {
-//       ctx.drawImage(paper, xPaper, 175);
-//     }
-//   }
-//
 // };
 
 
@@ -178,7 +166,7 @@ class Paper {
     for (let i = 0; i < 2; i += 1) {
       let pos = Math.random() * 300;
 
-      if (Math.abs(prevPaper - pos) > 50) {
+      if (Math.abs(prevPaper - pos) > 100) {
         this.ctx.drawImage(paperImg, pos, 250);
         prevPaper = pos;
       }
@@ -213,7 +201,7 @@ class Rock {
     for (let i = 0; i < 2; i += 1) {
       let pos = Math.random() * 300;
       //checks if previous rock and current rock are touching
-      if (Math.abs(prevRock - pos) > 50) {
+      if (Math.abs(prevRock - pos) > 55) {
         this.ctx.drawImage(rockImg, pos, 150);
         prevRock = pos;
       }
@@ -242,7 +230,7 @@ class Scissors {
   drawScissors() {
     const scissorsImg = new Image();
     scissorsImg.src = "https://s15.postimg.cc/40psnd10b/scissors.png";
-    this.ctx.drawImage(scissorsImg, 250, 500);
+    this.ctx.drawImage(scissorsImg, 250, 450);
   }
 }
 

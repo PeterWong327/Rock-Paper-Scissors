@@ -12,7 +12,7 @@ class Paper {
     for (let i = 0; i < 2; i += 1) {
       let pos = Math.random() * 300;
 
-      if (Math.abs(prevPaper - pos) > 50) {
+      if (Math.abs(prevPaper - pos) > 100) {
         this.ctx.drawImage(paperImg, pos, 250);
         prevPaper = pos;
       }

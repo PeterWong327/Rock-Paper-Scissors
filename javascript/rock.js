@@ -13,7 +13,7 @@ class Rock {
     for (let i = 0; i < 2; i += 1) {
       let pos = Math.random() * 300;
       //checks if previous rock and current rock are touching
-      if (Math.abs(prevRock - pos) > 50) {
+      if (Math.abs(prevRock - pos) > 55) {
         this.ctx.drawImage(rockImg, pos, 150);
         prevRock = pos;
       }

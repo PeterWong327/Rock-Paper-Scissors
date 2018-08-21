@@ -2,10 +2,14 @@ const Rock = require('./rock');
 const Scissors = require('./scissors');
 const Paper = require('./paper');
 
-const background = document.getElementById("canvas");
-const ctx = background.getContext("2d");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-
+const background = new Image ();
+background.src = "https://s22.postimg.cc/5h3h8fqnl/background.png";
+background.onload = function() {
+  ctx.drawImage(background, 0, 0);
+};
 // Images
 // const images = () => {
 //
@@ -41,20 +45,4 @@ window.onload = () => {
 };
 
 
-// canvas.onload = function(){
-//
-//   ctx.drawImage(background, 0, 0);
-//   ctx.drawImage(scissors, 350, 300);
-//
-//   for (let i = 0; i < 5; i += 1) {
-//     let xRock = Math.random() * canvas.width;
-//     let xPaper = Math.random() * canvas.width;
-//     if (xRock !== xPaper+5) {
-//       ctx.drawImage(rock, xRock, 100);
-//     }
-//     if (xRock !== xPaper+5) {
-//       ctx.drawImage(paper, xPaper, 175);
-//     }
-//   }
-//
 // };
