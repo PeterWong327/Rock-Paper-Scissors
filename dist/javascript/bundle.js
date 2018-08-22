@@ -104,9 +104,11 @@ class Game {
     // this.createRockRow();
     this.papers = [];
     // this.createPaperRow();
+    this.frameCount = 0;
+    this.scissors = new Scissors(ctx);
     this.loop();
     this.draw();
-    this.frameCount = 0;
+
   }
 
   draw () {
@@ -118,11 +120,11 @@ class Game {
     let prevRock = 0;
 
     for (let i = 0; i < 2; i += 1) {
-      let pos = Math.random() * 300;
+      let newRock = new Rock(ctx);
       //checks if previous rock and current rock are touching
-      if (Math.abs(prevRock - pos) > 55) {
-        this.rocks.push(new Rock(ctx));
-        prevRock = pos;
+      if (Math.abs(prevRock - newRock.pos.x) > 55) {
+        this.rocks.push(newRock);
+        prevRock = newRock.pos.x;
       }
     }
   }
@@ -131,11 +133,15 @@ class Game {
     let prevPaper = 0;
 
     for (let i = 0; i < 2; i += 1) {
-      let pos = Math.random() * 300 + prevPaper + 1;
+      //create a new paper first
+      let newPaper = new Paper(ctx);
+      // check if previous paper is going to overlap with  new paper
+      if (Math.abs(prevPaper - newPaper.pos.x) > 65) {
+        //check if new Paper will overlap, then push if not
+        this.papers.push(newPaper);
+        //newly created paper is now the previous paper
+        prevPaper = newPaper.pos.x;
 
-      if (Math.abs(prevPaper - pos) > 100) {
-        this.papers.push(new Paper(ctx));
-        prevPaper = pos;
       }
       // else {
       //   debugger;
@@ -150,6 +156,7 @@ class Game {
       Math.random() > 0.5 ? (this.createPaperRow()) : this.createRockRow();
       this.frameCount = 0;
     }
+
     this.frame = requestAnimationFrame(this.loop.bind(this));
     //update: calls update method from rock and paper
     this.rocks.forEach(rock => {
@@ -162,7 +169,7 @@ class Game {
 
     this.ctx.clearRect(0,0,500, 600);
 
-    //Draw each element
+  //Draw each element
 
     //draw background
     const background = new Image ();
@@ -170,8 +177,10 @@ class Game {
     this.ctx.drawImage(background, 0, 0);
 
     // draw scissor
-    let scissors = new Scissors(ctx);
-    scissors.drawScissors();
+    // let scissors = new Scissors(ctx);
+    this.scissors.drawScissors();
+    console.log('x','y', this.scissors.x, this.scissors.y);
+    this.scissors.updateScissors();
 
     //draw rocks
     this.rocks.forEach(rock => {
@@ -185,9 +194,20 @@ class Game {
   }
 }
 
+window.addEventListener('keydown', moveScissors);
+
+function moveScissors(e) {
+  let code = e.keyCode;
+  if (code === 37) {
+    game.scissors.moveScissors(-2, 0);
+  } else if (code === 39) {
+    game.scissors.moveScissors(2, 0);
+  }
+}
+
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
 const game = new Game(ctx);
 
 // const background = new Image ();
@@ -197,14 +217,14 @@ const game = new Game(ctx);
 //   ctx.drawImage(background, 0, 0);
 // };
 
-window.onload = () => {
-  let scissors = new Scissors(ctx);
-  let rock = new Rock(ctx);
-  let paper = new Paper(ctx);
-    rock.drawRock();
-    scissors.drawScissors();
-    paper.drawPaper();
-};
+// window.onload = () => {
+//   let scissors = new Scissors(ctx);
+//   let rock = new Rock(ctx);
+//   let paper = new Paper(ctx);
+//     rock.drawRock();
+//     scissors.drawScissors();
+//     paper.drawPaper();
+// };
 
 
 
@@ -309,12 +329,28 @@ module.exports = Rock;
 class Scissors {
   constructor(ctx) {
     this.ctx = ctx;
+    this.x = 250;
+    this.y = 350;
+    this.xSpeed = 0;
+    this.ySpeed = 0;
+    // this.pos = { x: 250, y: 350 };
   }
 
   drawScissors() {
     const scissorsImg = new Image();
     scissorsImg.src = "https://s15.postimg.cc/40psnd10b/scissors.png";
-    this.ctx.drawImage(scissorsImg, 250, 450);
+    this.ctx.drawImage(scissorsImg, this.x, this.y);
+  }
+
+  moveScissors(x, y) {
+
+    this.xSpeed = x;
+    this.ySpeed = y;
+  }
+
+  updateScissors() {
+    this.x = this.x + this.xSpeed;
+    this.y = this.y + this.ySpeed;
   }
 }
 
