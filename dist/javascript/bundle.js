@@ -108,7 +108,6 @@ class Game {
     this.scissors = new Scissors(ctx);
     this.loop();
     this.draw();
-
   }
 
   draw () {
@@ -122,9 +121,9 @@ class Game {
     for (let i = 0; i < 2; i += 1) {
       let newRock = new Rock(ctx);
       //checks if previous rock and current rock are touching
-      if (Math.abs(prevRock - newRock.pos.x) > 55) {
+      if (Math.abs(prevRock - newRock.x) > 55) {
         this.rocks.push(newRock);
-        prevRock = newRock.pos.x;
+        prevRock = newRock.x;
       }
     }
   }
@@ -136,11 +135,11 @@ class Game {
       //create a new paper first
       let newPaper = new Paper(ctx);
       // check if previous paper is going to overlap with  new paper
-      if (Math.abs(prevPaper - newPaper.pos.x) > 65) {
+      if (Math.abs(prevPaper - newPaper.x) > 65) {
         //check if new Paper will overlap, then push if not
         this.papers.push(newPaper);
         //newly created paper is now the previous paper
-        prevPaper = newPaper.pos.x;
+        prevPaper = newPaper.x;
 
       }
       // else {
@@ -148,6 +147,18 @@ class Game {
       // }
     }
   }
+
+  collision (obj1, obj2) {
+    if (obj1.x < obj2.x + obj2.width &&
+      obj1.x + obj1.width > obj2.x &&
+      obj1.y < obj2.y + obj2.height &&
+      obj1.y + obj1.height > obj2.y) {
+
+      console.log("collision SUCCESS!!");
+      return true;
+        // collision detected!
+  }
+}
 
   loop () {
     this.frameCount += 1;
@@ -191,6 +202,21 @@ class Game {
     this.papers.forEach(paper => {
       paper.drawPaper();
     });
+
+    //check for collision with a rock
+
+    this.rocks.forEach(rock => {
+      if (this.collision(this.scissors, rock)) {
+        console.log("collision with rock!");
+      }
+    });
+
+    //check for collision with a paper
+    this.papers.forEach(paper => {
+      if (this.collision(this.scissors, paper)) {
+        console.log("collision with paper!");
+      }
+    });
   }
 }
 
@@ -199,9 +225,9 @@ window.addEventListener('keydown', moveScissors);
 function moveScissors(e) {
   let code = e.keyCode;
   if (code === 37) {
-    game.scissors.moveScissors(-3, 0);
+    game.scissors.moveScissors(-10, 0);
   } else if (code === 39) {
-    game.scissors.moveScissors(3.5, 0);
+    game.scissors.moveScissors(10, 0);
   }
 }
 
@@ -244,18 +270,22 @@ const game = new Game(ctx);
 class Paper {
   constructor(ctx) {
     this.ctx = ctx;
-    this.pos = { x: (Math.random() * 450 + 45), y: -56 };
+    // this.pos = { x: , y: -56 };
+    this.x = (Math.random() * 450 + 45)
+    this.y = -56;
     this.image = new Image ();
     this.image.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
     this.speed = 2;
+    this.height = 54;
+    this.width = 54;
   }
 
   drawPaper() {
-    this.ctx.drawImage(this.image, this.pos.x, this.pos.y);
+    this.ctx.drawImage(this.image, this.x, this.y);
   }
 
   updatePaper() {
-    this.pos.y += this.speed;
+    this.y += this.speed;
   }
 }
 
@@ -295,20 +325,24 @@ class Rock {
   constructor(ctx) {
     //create rock here
     this.ctx = ctx;
-    this.pos = {x: (Math.random() * 450 + 48), y: -56 };
+    this.x = (Math.random() * 450 + 48);
+    this.y = -56;
+    // this.pos = {x: (Math.random() * 450 + 48), y: -56 };
     this.image = new Image ();
     this.image.src = "https://s15.postimg.cc/3wvz6x8bv/rock.png";
     this.speed = 2;
+    this.width = 54;
+    this.height = 48;
   }
 
   drawRock() {
     // draws one rock
-    this.ctx.drawImage(this.image, this.pos.x, this.pos.y);
+    this.ctx.drawImage(this.image, this.x, this.y);
   }
 
   //adds the speed to the vertical direction of rock to make it move down
   updateRock() {
-    this.pos.y += this.speed;
+    this.y += this.speed;
   }
 }
 
@@ -332,6 +366,8 @@ class Scissors {
     this.x = 250;
     this.y = 450;
     this.xSpeed = 0;
+    this.width = 35;
+    this.height = 52;
     // this.ySpeed = 0;
     // this.pos = { x: 250, y: 350 };
   }
@@ -344,11 +380,11 @@ class Scissors {
 
   moveScissors(xChange, yChange) {
     if ((this.x > 0) && (xChange < 0)) {
-      this.xSpeed = xChange;
-      // this.x += xChange;
+      // this.xSpeed = xChange;
+      this.x += xChange;
     } else if ((this.x < 499) && (xChange > 0)) {
-      // this.x += xChange;
-      this.xSpeed = xChange;
+      this.x += xChange;
+      // this.xSpeed = xChange;
     }
     // this.y += yChange;
   }

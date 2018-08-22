@@ -13,7 +13,6 @@ class Game {
     this.scissors = new Scissors(ctx);
     this.loop();
     this.draw();
-
   }
 
   draw () {
@@ -27,9 +26,9 @@ class Game {
     for (let i = 0; i < 2; i += 1) {
       let newRock = new Rock(ctx);
       //checks if previous rock and current rock are touching
-      if (Math.abs(prevRock - newRock.pos.x) > 55) {
+      if (Math.abs(prevRock - newRock.x) > 55) {
         this.rocks.push(newRock);
-        prevRock = newRock.pos.x;
+        prevRock = newRock.x;
       }
     }
   }
@@ -41,11 +40,11 @@ class Game {
       //create a new paper first
       let newPaper = new Paper(ctx);
       // check if previous paper is going to overlap with  new paper
-      if (Math.abs(prevPaper - newPaper.pos.x) > 65) {
+      if (Math.abs(prevPaper - newPaper.x) > 65) {
         //check if new Paper will overlap, then push if not
         this.papers.push(newPaper);
         //newly created paper is now the previous paper
-        prevPaper = newPaper.pos.x;
+        prevPaper = newPaper.x;
 
       }
       // else {
@@ -53,6 +52,18 @@ class Game {
       // }
     }
   }
+
+  collision (obj1, obj2) {
+    if (obj1.x < obj2.x + obj2.width &&
+      obj1.x + obj1.width > obj2.x &&
+      obj1.y < obj2.y + obj2.height &&
+      obj1.y + obj1.height > obj2.y) {
+
+      console.log("collision SUCCESS!!");
+      return true;
+        // collision detected!
+  }
+}
 
   loop () {
     this.frameCount += 1;
@@ -96,6 +107,21 @@ class Game {
     this.papers.forEach(paper => {
       paper.drawPaper();
     });
+
+    //check for collision with a rock
+
+    this.rocks.forEach(rock => {
+      if (this.collision(this.scissors, rock)) {
+        console.log("collision with rock!");
+      }
+    });
+
+    //check for collision with a paper
+    this.papers.forEach(paper => {
+      if (this.collision(this.scissors, paper)) {
+        console.log("collision with paper!");
+      }
+    });
   }
 }
 
@@ -104,9 +130,9 @@ window.addEventListener('keydown', moveScissors);
 function moveScissors(e) {
   let code = e.keyCode;
   if (code === 37) {
-    game.scissors.moveScissors(-3, 0);
+    game.scissors.moveScissors(-10, 0);
   } else if (code === 39) {
-    game.scissors.moveScissors(3.5, 0);
+    game.scissors.moveScissors(10, 0);
   }
 }
 

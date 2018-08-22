@@ -1,18 +1,22 @@
 class Paper {
   constructor(ctx) {
     this.ctx = ctx;
-    this.pos = { x: (Math.random() * 450 + 45), y: -56 };
+    // this.pos = { x: , y: -56 };
+    this.x = (Math.random() * 450 + 45)
+    this.y = -56;
     this.image = new Image ();
     this.image.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
     this.speed = 2;
+    this.height = 54;
+    this.width = 54;
   }
 
   drawPaper() {
-    this.ctx.drawImage(this.image, this.pos.x, this.pos.y);
+    this.ctx.drawImage(this.image, this.x, this.y);
   }
 
   updatePaper() {
-    this.pos.y += this.speed;
+    this.y += this.speed;
   }
 }
 

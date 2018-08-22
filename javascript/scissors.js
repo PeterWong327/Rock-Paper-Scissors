@@ -4,6 +4,8 @@ class Scissors {
     this.x = 250;
     this.y = 450;
     this.xSpeed = 0;
+    this.width = 35;
+    this.height = 52;
     // this.ySpeed = 0;
     // this.pos = { x: 250, y: 350 };
   }
@@ -16,11 +18,11 @@ class Scissors {
 
   moveScissors(xChange, yChange) {
     if ((this.x > 0) && (xChange < 0)) {
-      this.xSpeed = xChange;
-      // this.x += xChange;
+      // this.xSpeed = xChange;
+      this.x += xChange;
     } else if ((this.x < 499) && (xChange > 0)) {
-      // this.x += xChange;
-      this.xSpeed = xChange;
+      this.x += xChange;
+      // this.xSpeed = xChange;
     }
     // this.y += yChange;
   }
