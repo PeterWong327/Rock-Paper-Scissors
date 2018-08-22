@@ -38,11 +38,11 @@ This game will consist of a single screen with the simulation canvas along with 
 
 **Day 1:** Implement code to make background scroll from top to bottom, along with generating obstacles (rocks and papers) randomly. Goals for the day:
 - [ ] Learn how to scroll the background and implement a continuous loop for the scroll
-- [ ] Learn how to randomly generate the rocks and papers and have them scroll down the screen
+- [x] Learn how to randomly generate the rocks and papers and have them scroll down the screen
 
 **Day 2:** Implement ability for user to move pair of scissors left and right. Goals for the day:
-- [ ] Finish random obstacle generation
-- [ ] Set up keyboard keys to enable user control
+- [x] Finish random obstacle generation
+- [x] Set up keyboard keys to enable user control
 
 **Day 3:** Implement collision detection for scissors and obstacles. Goals for the day:
 - [ ] Set up collision detection for scissors and rocks: game over
