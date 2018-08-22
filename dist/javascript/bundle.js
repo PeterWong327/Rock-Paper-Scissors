@@ -244,7 +244,7 @@ const game = new Game(ctx);
 class Paper {
   constructor(ctx) {
     this.ctx = ctx;
-    this.pos = { x: (Math.random() * 450 + 50), y: -56 };
+    this.pos = { x: (Math.random() * 450 + 45), y: -56 };
     this.image = new Image ();
     this.image.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
     this.speed = 2;
@@ -295,7 +295,7 @@ class Rock {
   constructor(ctx) {
     //create rock here
     this.ctx = ctx;
-    this.pos = {x: (Math.random() * 450 + 50), y: -56 };
+    this.pos = {x: (Math.random() * 450 + 48), y: -56 };
     this.image = new Image ();
     this.image.src = "https://s15.postimg.cc/3wvz6x8bv/rock.png";
     this.speed = 2;
