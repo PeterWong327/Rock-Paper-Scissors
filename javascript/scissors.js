@@ -5,7 +5,7 @@ class Scissors {
     this.y = 450;
     this.xSpeed = 0;
     this.width = 35;
-    this.height = 52;
+    this.height = 45;
     // this.ySpeed = 0;
     // this.pos = { x: 250, y: 350 };
   }
@@ -17,17 +17,15 @@ class Scissors {
   }
 
   moveScissors(xChange, yChange) {
-    if ((this.x > 0) && (xChange < 0)) {
-      // this.xSpeed = xChange;
-      this.x += xChange;
-    } else if ((this.x < 499) && (xChange > 0)) {
-      this.x += xChange;
-      // this.xSpeed = xChange;
+    if (((this.x > 0) && (xChange < 0)) || ((this.x < 499) && (xChange > 0))) {
+      this.xSpeed = xChange;
+      // this.x += xChange;
     }
     // this.y += yChange;
   }
 
   updateScissors() {
+      // if scissor is at the left edge of the screen
     if (this.x < 0) {
       this.x = 0;
       // if scissor is at the right edge of screen

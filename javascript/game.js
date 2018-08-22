@@ -20,6 +20,10 @@ class Game {
     // draw everything
   }
 
+  gameOver () {
+    cancelAnimationFrame(this.frame);
+  }
+
   createRockRow (){
     let prevRock = 0;
 
@@ -53,6 +57,17 @@ class Game {
     }
   }
 
+  collisionRock (scissor, rock) {
+    if (scissor.x < rock.x + rock.width &&
+      scissor.x + scissor.width > rock.x &&
+      scissor.y < rock.y + rock.height &&
+      scissor.y + scissor.height > rock.y) {
+
+      console.log("collision rock SUCCESS!!");
+      return true;
+    }
+  }
+
   collision (obj1, obj2) {
     if (obj1.x < obj2.x + obj2.width &&
       obj1.x + obj1.width > obj2.x &&
@@ -61,7 +76,6 @@ class Game {
 
       console.log("collision SUCCESS!!");
       return true;
-        // collision detected!
   }
 }
 
@@ -111,8 +125,10 @@ class Game {
     //check for collision with a rock
 
     this.rocks.forEach(rock => {
-      if (this.collision(this.scissors, rock)) {
+      if (this.collisionRock(this.scissors, rock)) {
         console.log("collision with rock!");
+        // setTimeout(this.gameOver(), 1000);
+        this.gameOver();
       }
     });
 
@@ -130,11 +146,12 @@ window.addEventListener('keydown', moveScissors);
 function moveScissors(e) {
   let code = e.keyCode;
   if (code === 37) {
-    game.scissors.moveScissors(-10, 0);
+    game.scissors.moveScissors(-4, 0);
   } else if (code === 39) {
-    game.scissors.moveScissors(10, 0);
+    game.scissors.moveScissors(4, 0);
   }
 }
+
 
 
 const canvas = document.getElementById("canvas");

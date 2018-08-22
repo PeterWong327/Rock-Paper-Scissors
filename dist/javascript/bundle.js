@@ -115,6 +115,10 @@ class Game {
     // draw everything
   }
 
+  gameOver () {
+    cancelAnimationFrame(this.frame);
+  }
+
   createRockRow (){
     let prevRock = 0;
 
@@ -148,6 +152,17 @@ class Game {
     }
   }
 
+  collisionRock (scissor, rock) {
+    if (scissor.x < rock.x + rock.width &&
+      scissor.x + scissor.width > rock.x &&
+      scissor.y < rock.y + rock.height &&
+      scissor.y + scissor.height > rock.y) {
+
+      console.log("collision rock SUCCESS!!");
+      return true;
+    }
+  }
+
   collision (obj1, obj2) {
     if (obj1.x < obj2.x + obj2.width &&
       obj1.x + obj1.width > obj2.x &&
@@ -156,7 +171,6 @@ class Game {
 
       console.log("collision SUCCESS!!");
       return true;
-        // collision detected!
   }
 }
 
@@ -206,8 +220,10 @@ class Game {
     //check for collision with a rock
 
     this.rocks.forEach(rock => {
-      if (this.collision(this.scissors, rock)) {
+      if (this.collisionRock(this.scissors, rock)) {
         console.log("collision with rock!");
+        // setTimeout(this.gameOver(), 1000);
+        this.gameOver();
       }
     });
 
@@ -225,11 +241,12 @@ window.addEventListener('keydown', moveScissors);
 function moveScissors(e) {
   let code = e.keyCode;
   if (code === 37) {
-    game.scissors.moveScissors(-10, 0);
+    game.scissors.moveScissors(-4, 0);
   } else if (code === 39) {
-    game.scissors.moveScissors(10, 0);
+    game.scissors.moveScissors(4, 0);
   }
 }
+
 
 
 const canvas = document.getElementById("canvas");
@@ -331,7 +348,7 @@ class Rock {
     this.image = new Image ();
     this.image.src = "https://s15.postimg.cc/3wvz6x8bv/rock.png";
     this.speed = 2;
-    this.width = 54;
+    this.width = 52;
     this.height = 48;
   }
 
@@ -367,7 +384,7 @@ class Scissors {
     this.y = 450;
     this.xSpeed = 0;
     this.width = 35;
-    this.height = 52;
+    this.height = 45;
     // this.ySpeed = 0;
     // this.pos = { x: 250, y: 350 };
   }
@@ -379,17 +396,15 @@ class Scissors {
   }
 
   moveScissors(xChange, yChange) {
-    if ((this.x > 0) && (xChange < 0)) {
-      // this.xSpeed = xChange;
-      this.x += xChange;
-    } else if ((this.x < 499) && (xChange > 0)) {
-      this.x += xChange;
-      // this.xSpeed = xChange;
+    if (((this.x > 0) && (xChange < 0)) || ((this.x < 499) && (xChange > 0))) {
+      this.xSpeed = xChange;
+      // this.x += xChange;
     }
     // this.y += yChange;
   }
 
   updateScissors() {
+      // if scissor is at the left edge of the screen
     if (this.x < 0) {
       this.x = 0;
       // if scissor is at the right edge of screen
