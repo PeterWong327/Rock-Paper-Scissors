@@ -2,9 +2,9 @@ class Scissors {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 250;
-    this.y = 350;
+    this.y = 450;
     this.xSpeed = 0;
-    this.ySpeed = 0;
+    // this.ySpeed = 0;
     // this.pos = { x: 250, y: 350 };
   }
 
@@ -14,15 +14,27 @@ class Scissors {
     this.ctx.drawImage(scissorsImg, this.x, this.y);
   }
 
-  moveScissors(x, y) {
-
-    this.xSpeed = x;
-    this.ySpeed = y;
+  moveScissors(xChange, yChange) {
+    if ((this.x > 0) && (xChange < 0)) {
+      this.xSpeed = xChange;
+      // this.x += xChange;
+    } else if ((this.x < 499) && (xChange > 0)) {
+      // this.x += xChange;
+      this.xSpeed = xChange;
+    }
+    // this.y += yChange;
   }
 
   updateScissors() {
-    this.x = this.x + this.xSpeed;
-    this.y = this.y + this.ySpeed;
+    if (this.x < 0) {
+      this.x = 0;
+      // if scissor is at the right edge of screen
+    } else if (this.x > 499) {
+      this.x = 498;
+    } else {
+      this.x = this.x + this.xSpeed;
+    }
+    // this.y = this.y + this.ySpeed;
   }
 }
 

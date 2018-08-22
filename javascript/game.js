@@ -57,7 +57,7 @@ class Game {
   loop () {
     this.frameCount += 1;
     // if ((this.frameCount * this.rocks[0].speed) >= 55) {
-    if (this.frameCount > 125) {
+    if (this.frameCount > 100) {
       Math.random() > 0.5 ? (this.createPaperRow()) : this.createRockRow();
       this.frameCount = 0;
     }
@@ -72,19 +72,19 @@ class Game {
       paper.updatePaper();
     });
 
-    this.ctx.clearRect(0,0,500, 600);
+    this.ctx.clearRect(0,0,550, 650);
+
 
   //Draw each element
 
     //draw background
     const background = new Image ();
-    background.src = "https://s22.postimg.cc/5h3h8fqnl/background.png";
+    background.src = "https://s22.postimg.cc/791yje2a9/new_BG.png";
     this.ctx.drawImage(background, 0, 0);
 
     // draw scissor
     // let scissors = new Scissors(ctx);
     this.scissors.drawScissors();
-    console.log('x','y', this.scissors.x, this.scissors.y);
     this.scissors.updateScissors();
 
     //draw rocks
@@ -104,9 +104,9 @@ window.addEventListener('keydown', moveScissors);
 function moveScissors(e) {
   let code = e.keyCode;
   if (code === 37) {
-    game.scissors.moveScissors(-2, 0);
+    game.scissors.moveScissors(-3, 0);
   } else if (code === 39) {
-    game.scissors.moveScissors(2, 0);
+    game.scissors.moveScissors(3.5, 0);
   }
 }
 

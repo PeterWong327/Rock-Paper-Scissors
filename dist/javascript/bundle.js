@@ -152,7 +152,7 @@ class Game {
   loop () {
     this.frameCount += 1;
     // if ((this.frameCount * this.rocks[0].speed) >= 55) {
-    if (this.frameCount > 125) {
+    if (this.frameCount > 100) {
       Math.random() > 0.5 ? (this.createPaperRow()) : this.createRockRow();
       this.frameCount = 0;
     }
@@ -167,19 +167,19 @@ class Game {
       paper.updatePaper();
     });
 
-    this.ctx.clearRect(0,0,500, 600);
+    this.ctx.clearRect(0,0,550, 650);
+
 
   //Draw each element
 
     //draw background
     const background = new Image ();
-    background.src = "https://s22.postimg.cc/5h3h8fqnl/background.png";
+    background.src = "https://s22.postimg.cc/791yje2a9/new_BG.png";
     this.ctx.drawImage(background, 0, 0);
 
     // draw scissor
     // let scissors = new Scissors(ctx);
     this.scissors.drawScissors();
-    console.log('x','y', this.scissors.x, this.scissors.y);
     this.scissors.updateScissors();
 
     //draw rocks
@@ -199,9 +199,9 @@ window.addEventListener('keydown', moveScissors);
 function moveScissors(e) {
   let code = e.keyCode;
   if (code === 37) {
-    game.scissors.moveScissors(-2, 0);
+    game.scissors.moveScissors(-3, 0);
   } else if (code === 39) {
-    game.scissors.moveScissors(2, 0);
+    game.scissors.moveScissors(3.5, 0);
   }
 }
 
@@ -244,10 +244,10 @@ const game = new Game(ctx);
 class Paper {
   constructor(ctx) {
     this.ctx = ctx;
-    this.pos = { x: Math.random() * 300, y: -56 };
+    this.pos = { x: (Math.random() * 450 + 50), y: -56 };
     this.image = new Image ();
     this.image.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
-    this.speed = 1;
+    this.speed = 2;
   }
 
   drawPaper() {
@@ -295,10 +295,10 @@ class Rock {
   constructor(ctx) {
     //create rock here
     this.ctx = ctx;
-    this.pos = {x: Math.random() * 300, y: -56 };
+    this.pos = {x: (Math.random() * 450 + 50), y: -56 };
     this.image = new Image ();
     this.image.src = "https://s15.postimg.cc/3wvz6x8bv/rock.png";
-    this.speed = 1;
+    this.speed = 2;
   }
 
   drawRock() {
@@ -330,9 +330,9 @@ class Scissors {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 250;
-    this.y = 350;
+    this.y = 450;
     this.xSpeed = 0;
-    this.ySpeed = 0;
+    // this.ySpeed = 0;
     // this.pos = { x: 250, y: 350 };
   }
 
@@ -342,15 +342,27 @@ class Scissors {
     this.ctx.drawImage(scissorsImg, this.x, this.y);
   }
 
-  moveScissors(x, y) {
-
-    this.xSpeed = x;
-    this.ySpeed = y;
+  moveScissors(xChange, yChange) {
+    if ((this.x > 0) && (xChange < 0)) {
+      this.xSpeed = xChange;
+      // this.x += xChange;
+    } else if ((this.x < 499) && (xChange > 0)) {
+      // this.x += xChange;
+      this.xSpeed = xChange;
+    }
+    // this.y += yChange;
   }
 
   updateScissors() {
-    this.x = this.x + this.xSpeed;
-    this.y = this.y + this.ySpeed;
+    if (this.x < 0) {
+      this.x = 0;
+      // if scissor is at the right edge of screen
+    } else if (this.x > 499) {
+      this.x = 498;
+    } else {
+      this.x = this.x + this.xSpeed;
+    }
+    // this.y = this.y + this.ySpeed;
   }
 }
 
