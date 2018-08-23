@@ -2,7 +2,7 @@ class Scissors {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 250;
-    this.y = 450;
+    this.y = 500;
     this.xSpeed = 0;
     this.width = 35;
     this.height = 45;

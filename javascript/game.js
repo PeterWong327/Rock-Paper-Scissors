@@ -92,11 +92,12 @@ class Game {
     this.frame = requestAnimationFrame(this.loop.bind(this));
     //update: calls update method from rock and paper
     this.rocks.forEach(rock => {
-      rock.updateRock(this.score / 10);
+      //add this.score as argument to use for speed increment
+      rock.updateRock();
     });
 
     this.papers.forEach(paper => {
-      paper.updatePaper(this.score / 10);
+      paper.updatePaper();
     });
 
     this.ctx.clearRect(0,0,550, 650);
@@ -112,7 +113,11 @@ class Game {
     // draw scissor
     // let scissors = new Scissors(ctx);
     this.scissors.drawScissors();
-    this.scissors.updateScissors();
+
+    //check if scissor within screen. Update if within.
+    // if ((this.scissors.x >= 0) && (this.scissors.x <= 499)) {
+      this.scissors.updateScissors();
+    // }
 
     //draw rocks
     this.rocks.forEach(rock => {
@@ -149,7 +154,7 @@ window.addEventListener('keydown', moveScissors);
 
 function moveScissors(e) {
   let code = e.keyCode;
-  if (code === 37) {
+  if (code === 37){
     game.scissors.moveScissors(-4, 0);
   } else if (code === 39) {
     game.scissors.moveScissors(4, 0);

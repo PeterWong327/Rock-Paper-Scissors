@@ -2,7 +2,7 @@ class Paper {
   constructor(ctx) {
     this.ctx = ctx;
     // this.pos = { x: , y: -56 };
-    this.x = (Math.random() * 450 + 45);
+    this.x = (Math.random() * 500 - 10);
     this.y = -56;
     this.image = new Image ();
     this.image.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
@@ -15,8 +15,8 @@ class Paper {
     this.ctx.drawImage(this.image, this.x, this.y);
   }
 
-  updatePaper(speedUp) {
-    this.y += (this.speed + speedUp);
+  updatePaper() {
+    this.y += (this.speed);
   }
 
   removePaper() {

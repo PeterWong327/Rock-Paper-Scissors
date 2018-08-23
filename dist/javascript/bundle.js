@@ -187,11 +187,12 @@ class Game {
     this.frame = requestAnimationFrame(this.loop.bind(this));
     //update: calls update method from rock and paper
     this.rocks.forEach(rock => {
-      rock.updateRock(this.score / 10);
+      //add this.score as argument to use for speed increment
+      rock.updateRock();
     });
 
     this.papers.forEach(paper => {
-      paper.updatePaper(this.score / 10);
+      paper.updatePaper();
     });
 
     this.ctx.clearRect(0,0,550, 650);
@@ -207,7 +208,11 @@ class Game {
     // draw scissor
     // let scissors = new Scissors(ctx);
     this.scissors.drawScissors();
-    this.scissors.updateScissors();
+
+    //check if scissor within screen. Update if within.
+    // if ((this.scissors.x >= 0) && (this.scissors.x <= 499)) {
+      this.scissors.updateScissors();
+    // }
 
     //draw rocks
     this.rocks.forEach(rock => {
@@ -244,7 +249,7 @@ window.addEventListener('keydown', moveScissors);
 
 function moveScissors(e) {
   let code = e.keyCode;
-  if (code === 37) {
+  if (code === 37){
     game.scissors.moveScissors(-4, 0);
   } else if (code === 39) {
     game.scissors.moveScissors(4, 0);
@@ -293,7 +298,7 @@ class Paper {
   constructor(ctx) {
     this.ctx = ctx;
     // this.pos = { x: , y: -56 };
-    this.x = (Math.random() * 450 + 45);
+    this.x = (Math.random() * 500 - 10);
     this.y = -56;
     this.image = new Image ();
     this.image.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
@@ -306,8 +311,8 @@ class Paper {
     this.ctx.drawImage(this.image, this.x, this.y);
   }
 
-  updatePaper(speedUp) {
-    this.y += (this.speed + speedUp);
+  updatePaper() {
+    this.y += (this.speed);
   }
 
   removePaper() {
@@ -352,7 +357,7 @@ class Rock {
   constructor(ctx) {
     //create rock here
     this.ctx = ctx;
-    this.x = (Math.random() * 450 + 48);
+    this.x = (Math.random() * 500 - 10);
     this.y = -56;
     // this.pos = {x: (Math.random() * 450 + 48), y: -56 };
     this.image = new Image ();
@@ -368,8 +373,9 @@ class Rock {
   }
 
   //adds the speed to the vertical direction of rock to make it move down
-  updateRock(speedUp) {
-    this.y += (this.speed + speedUp);
+  // add this.score as argument to incease speed when score goes up
+  updateRock() {
+    this.y += (this.speed);
   }
 }
 
@@ -391,7 +397,7 @@ class Scissors {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 250;
-    this.y = 450;
+    this.y = 500;
     this.xSpeed = 0;
     this.width = 35;
     this.height = 45;

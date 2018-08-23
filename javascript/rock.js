@@ -2,7 +2,7 @@ class Rock {
   constructor(ctx) {
     //create rock here
     this.ctx = ctx;
-    this.x = (Math.random() * 450 + 48);
+    this.x = (Math.random() * 500 - 10);
     this.y = -56;
     // this.pos = {x: (Math.random() * 450 + 48), y: -56 };
     this.image = new Image ();
@@ -18,8 +18,9 @@ class Rock {
   }
 
   //adds the speed to the vertical direction of rock to make it move down
-  updateRock(speedUp) {
-    this.y += (this.speed + speedUp);
+  // add this.score as argument to incease speed when score goes up
+  updateRock() {
+    this.y += (this.speed);
   }
 }
 
