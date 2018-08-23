@@ -153,8 +153,8 @@ class Game {
   }
 
   collisionRock (scissor, rock) {
-    if (scissor.x < rock.x + rock.width &&
-      scissor.x + scissor.width > rock.x &&
+    if (scissor.x + 10 < rock.x + rock.width - 5 &&
+      scissor.x + 10 + scissor.width - 5 > rock.x &&
       scissor.y < rock.y + rock.height &&
       scissor.y + scissor.height > rock.y) {
 
