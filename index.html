@@ -7,17 +7,34 @@
           canvas {
             position: absolute;
             top: 100px;
-            left: 150px;
+            margin-left: 30%;
+            margin-right: 30%;
             background: transparent;
-            /* border: 1px #D8E7FE; */
+
           }
       </style>
   </head>
   <body>
       <canvas id="canvas" width="550" height="650">
-
         Testing
       </canvas>
+      <button type="button">Start Game</button>
+
+<input type="button" value="Start" onclick="game.startGame();">
+
+      <p/>
+      <label>Instructions: move the pair of scissors to avoid the rocks and cut as many papers as you can.</label>
+      <p/>
+      <label>Controls:<p/> left arrow key = Move left <p/>right arrow key = Move right</label>
+      <p/>
+      <button type="button">Mute/Un-mute</button>
+
+      <p/>
+      <a href="https://www.linkedin.com/in/peterwong88/" target="_blank">LinkedIn</a>
+      <p/>
+      <a href="https://github.com/PeterWong327/Rock-Paper-Scissors" target="_blank">Github</a>
+
+
 
 
       <script src="./dist/javascript/bundle.js"></script>

@@ -2,7 +2,7 @@ class Rock {
   constructor(ctx) {
     //create rock here
     this.ctx = ctx;
-    this.x = (Math.random() * 500 - 10);
+    this.x = (Math.random() * 490);
     this.y = -56;
     // this.pos = {x: (Math.random() * 450 + 48), y: -56 };
     this.image = new Image ();

@@ -116,9 +116,21 @@ class Game {
     // draw everything
   }
 
-  gameOver () {
-    cancelAnimationFrame(this.frame);
+  //starts a new game and calls the loop function
+  startGame () {
+    this.game();
+    this.loop();
   }
+
+
+
+  gameOver () {
+    this.ctx.font="30px Georgia";
+    this.ctx.fillText("GAME OVER", 200, 250);
+    cancelAnimationFrame(this.frame);
+    this.score = 0;
+  }
+
 
   createRockRow (){
     let prevRock = 0;
@@ -145,21 +157,15 @@ class Game {
         this.papers.push(newPaper);
         //newly created paper is now the previous paper
         prevPaper = newPaper.x;
-
       }
-      // else {
-      //   debugger;
-      // }
     }
   }
 
   collisionRock (scissor, rock) {
-    if (scissor.x + 10 < rock.x + rock.width - 10 &&
-      scissor.x + 10 + scissor.width - 10 > rock.x &&
+    if (scissor.x + 10 < rock.x + rock.width - 8 &&
+      scissor.x + 10 + scissor.width - 8 > rock.x &&
       scissor.y < rock.y + rock.height - 10 &&
       scissor.y + scissor.height - 10 > rock.y) {
-
-      console.log("GAME OVER: Refresh page to restart");
       return true;
     }
   }
@@ -177,7 +183,7 @@ class Game {
 
   loop () {
     this.frameCount += 1;
-    console.log(this.frameCount);
+    // console.log(this.frameCount);
     // if ((this.frameCount * this.rocks[0].speed) >= 55) {
     if (this.frameCount > 50) {
       Math.random() > 0.5 ? (this.createPaperRow()) : this.createRockRow();
@@ -197,8 +203,6 @@ class Game {
 
     this.ctx.clearRect(0,0,550, 650);
 
-
-  //Draw each element
 
     //draw background
     const background = new Image ();
@@ -224,8 +228,11 @@ class Game {
       paper.drawPaper();
     });
 
-    //check for collision with a rock
+    //display score
+    this.ctx.font="20px Georgia";
+    this.ctx.fillText("Score: " + this.score, 450, 50);
 
+    //check for collision with a rock
     this.rocks.forEach(rock => {
       if (this.collisionRock(this.scissors, rock)) {
         // console.log("collision with rock!");
@@ -239,7 +246,7 @@ class Game {
       if (this.collision(this.scissors, paper)) {
         paper.removePaper();
         this.score += 1;
-        console.log("Score:" + this.score);
+        // console.log("Score:" + this.score);
       }
     });
   }
@@ -261,6 +268,9 @@ function moveScissors(e) {
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const game = new Game(ctx);
+
+
+
 
 // const background = new Image ();
 // background.src = "https://s22.postimg.cc/5h3h8fqnl/background.png";
@@ -298,7 +308,7 @@ class Paper {
   constructor(ctx) {
     this.ctx = ctx;
     // this.pos = { x: , y: -56 };
-    this.x = (Math.random() * 500 - 10);
+    this.x = (Math.random() * 490);
     this.y = -56;
     this.image = new Image ();
     this.image.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
@@ -357,7 +367,7 @@ class Rock {
   constructor(ctx) {
     //create rock here
     this.ctx = ctx;
-    this.x = (Math.random() * 500 - 10);
+    this.x = (Math.random() * 490);
     this.y = -56;
     // this.pos = {x: (Math.random() * 450 + 48), y: -56 };
     this.image = new Image ();
