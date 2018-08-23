@@ -45,9 +45,9 @@ This game will consist of a single screen with the simulation canvas along with 
 - [x] Set up keyboard keys to enable user control
 
 **Day 3:** Implement collision detection for scissors and obstacles. Goals for the day:
-- [ ] Set up collision detection for scissors and rocks: game over
+- [x] Set up collision detection for scissors and rocks: game over
 - [ ] Create and display a counter to show total points
-- [ ] Set up collision detection for scissors and papers: +1 to the points
+- [x] Set up collision detection for scissors and papers: +1 to the points
 
 **Day 4:** Implement music/sound effects, and style the frontend. Goals for the day:
 - [ ] Add music to the game when the game is started

@@ -13,6 +13,7 @@ class Game {
     this.scissors = new Scissors(ctx);
     this.loop();
     this.draw();
+    this.score = 0;
   }
 
   draw () {
@@ -58,12 +59,12 @@ class Game {
   }
 
   collisionRock (scissor, rock) {
-    if (scissor.x + 10 < rock.x + rock.width - 5 &&
-      scissor.x + 10 + scissor.width - 5 > rock.x &&
-      scissor.y < rock.y + rock.height &&
-      scissor.y + scissor.height > rock.y) {
+    if (scissor.x + 10 < rock.x + rock.width - 10 &&
+      scissor.x + 10 + scissor.width - 10 > rock.x &&
+      scissor.y < rock.y + rock.height - 10 &&
+      scissor.y + scissor.height - 10 > rock.y) {
 
-      console.log("collision rock SUCCESS!!");
+      console.log("GAME OVER: Refresh page to restart");
       return true;
     }
   }
@@ -74,15 +75,16 @@ class Game {
       obj1.y < obj2.y + obj2.height &&
       obj1.y + obj1.height > obj2.y) {
 
-      console.log("collision SUCCESS!!");
+      // console.log("collision SUCCESS!!");
       return true;
   }
 }
 
   loop () {
     this.frameCount += 1;
+    console.log(this.frameCount);
     // if ((this.frameCount * this.rocks[0].speed) >= 55) {
-    if (this.frameCount > 100) {
+    if (this.frameCount > 50) {
       Math.random() > 0.5 ? (this.createPaperRow()) : this.createRockRow();
       this.frameCount = 0;
     }
@@ -90,11 +92,11 @@ class Game {
     this.frame = requestAnimationFrame(this.loop.bind(this));
     //update: calls update method from rock and paper
     this.rocks.forEach(rock => {
-      rock.updateRock();
+      rock.updateRock(this.score / 10);
     });
 
     this.papers.forEach(paper => {
-      paper.updatePaper();
+      paper.updatePaper(this.score / 10);
     });
 
     this.ctx.clearRect(0,0,550, 650);
@@ -126,7 +128,7 @@ class Game {
 
     this.rocks.forEach(rock => {
       if (this.collisionRock(this.scissors, rock)) {
-        console.log("collision with rock!");
+        // console.log("collision with rock!");
         // setTimeout(this.gameOver(), 1000);
         this.gameOver();
       }
@@ -135,7 +137,9 @@ class Game {
     //check for collision with a paper
     this.papers.forEach(paper => {
       if (this.collision(this.scissors, paper)) {
-        console.log("collision with paper!");
+        paper.removePaper();
+        this.score += 1;
+        console.log("Score:" + this.score);
       }
     });
   }
@@ -178,3 +182,4 @@ const game = new Game(ctx);
 
 
 // Link to background image: https://s22.postimg.cc/5h3h8fqnl/background.png
+// Link to updated background image: https://s22.postimg.cc/791yje2a9/new_BG.png

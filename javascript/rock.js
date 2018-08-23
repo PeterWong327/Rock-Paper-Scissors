@@ -18,8 +18,8 @@ class Rock {
   }
 
   //adds the speed to the vertical direction of rock to make it move down
-  updateRock() {
-    this.y += this.speed;
+  updateRock(speedUp) {
+    this.y += (this.speed + speedUp);
   }
 }
 
