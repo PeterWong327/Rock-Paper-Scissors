@@ -107,8 +107,8 @@ class Game {
     this.draw();
     this.score = 0;
     this.playMusic = new Audio("./sounds/bgMusic2.mp3");
-    this.rockSound = new Audio("./sounds/rockHit.mp3");
-    this.paperSound = new Audio("./sounds/startGame.mp3");
+    this.rockSound = new Audio("./sounds/gameOver.mp3");
+    this.paperSound = new Audio("./sounds/paper.mp3");
     this.startGameSound = new Audio("./sounds/startGame.mp3");
   }
 
@@ -170,7 +170,7 @@ class Game {
   }
 
   collisionRock (scissor, rock) {
-    if (scissor.x + 10 < rock.x + rock.width - 8 &&
+    if (scissor.x + 10 < rock.x + rock.width - 10 &&
       scissor.x + 10 + scissor.width - 8 > rock.x &&
       scissor.y < rock.y + rock.height - 10 &&
       scissor.y + scissor.height - 10 > rock.y) {
