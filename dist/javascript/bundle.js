@@ -106,29 +106,37 @@ class Game {
     // this.createPaperRow();
     this.frameCount = 0;
     this.scissors = new Scissors(ctx);
-    this.loop();
+    // this.loop();
     this.draw();
     this.score = 0;
+    // this.playMusic();
+  }
+
+  playMusic () {
+    music.play();
   }
 
   draw () {
     // clearFrame
     // draw everything
+    const background = new Image ();
+    background.src = "https://s22.postimg.cc/791yje2a9/new_BG.png";
+    this.ctx.drawImage(background, 0, 0);
   }
 
   //starts a new game and calls the loop function
   startGame () {
-    this.game();
+    // debugger;
+    // this.game();
     this.loop();
   }
 
-
-
   gameOver () {
-    this.ctx.font="30px Georgia";
-    this.ctx.fillText("GAME OVER", 200, 250);
+    this.ctx.font="40px Comic Sans MS";
+    this.ctx.fillStyle = "red";
+    this.ctx.fillText("GAME OVER", 175, 280);
     cancelAnimationFrame(this.frame);
-    this.score = 0;
+    // this.score = 0;
   }
 
 
@@ -229,7 +237,8 @@ class Game {
     });
 
     //display score
-    this.ctx.font="20px Georgia";
+    this.ctx.font="20px Comic Sans MS";
+    this.ctx.fillStyle = "blue";
     this.ctx.fillText("Score: " + this.score, 450, 50);
 
     //check for collision with a rock
@@ -263,13 +272,17 @@ function moveScissors(e) {
   }
 }
 
-
+const music = document.getElementById("bgMusic");
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+
+
 const game = new Game(ctx);
 
+document.getElementById("startGamebtn").addEventListener("click", () => game.startGame());
 
+// window.addEventListener('click', startGame(gameStart));
 
 
 // const background = new Image ();

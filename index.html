@@ -2,14 +2,14 @@
 <html>
   <head>
       <title>Rock-Paper-Scissors</title>
-      <!-- <link rel="stylesheet" type="text/css" href="main.css"/> -->
+      <link rel="stylesheet" type="text/css" href="main.css"/>
       <style type="text/css">
           canvas {
             position: absolute;
             top: 100px;
             margin-left: 30%;
             margin-right: 30%;
-            background: transparent;
+            /* background: transparent; */
 
           }
       </style>
@@ -18,9 +18,7 @@
       <canvas id="canvas" width="550" height="650">
         Testing
       </canvas>
-      <button type="button">Start Game</button>
-
-<input type="button" value="Start" onclick="game.startGame();">
+      <button type="button" id="startGamebtn">Start Game</button>
 
       <p/>
       <label>Instructions: move the pair of scissors to avoid the rocks and cut as many papers as you can.</label>
