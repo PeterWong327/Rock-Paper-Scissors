@@ -127,7 +127,7 @@ class Game {
     this.papers = [];
     this.frameCount = 0;
     this.scissors = new Scissors(ctx);
-    this.draw();
+    // this.draw();
     this.score = 0;
     this.loop();
   }
@@ -189,7 +189,7 @@ class Game {
 
   loop () {
     this.playMusic.play();
-    this.frameCount += 1;
+    this.frameCount += (1 + Math.floor(this.score/25));
     if (this.frameCount > 50) {
       Math.random() > 0.5 ? (this.createPaperRow()) : this.createRockRow();
       this.frameCount = 0;
@@ -199,11 +199,11 @@ class Game {
     //update: calls update method from rock and paper
     this.rocks.forEach(rock => {
       //add this.score as argument to use for speed increment
-      rock.updateRock();
+      rock.updateRock(this.score);
     });
 
     this.papers.forEach(paper => {
-      paper.updatePaper();
+      paper.updatePaper(this.score);
     });
 
     this.ctx.clearRect(0,0,550, 650);
@@ -220,7 +220,7 @@ class Game {
 
     //check if scissor within screen. Update if within.
     // if ((this.scissors.x >= 0) && (this.scissors.x <= 499)) {
-      this.scissors.updateScissors();
+    this.scissors.updateScissors();
     // }
 
     //draw rocks
@@ -238,6 +238,11 @@ class Game {
     this.ctx.fillStyle = "blue";
     this.ctx.fillText("Score: " + this.score, 400, 50);
 
+    //display level
+    this.ctx.font="28px Comic Sans MS";
+    this.ctx.fillStyle = "blue";
+    this.ctx.fillText("Level: " + Math.floor(this.score / 25), 410, 80);
+
     //check for collision with a rock
     this.rocks.forEach(rock => {
       if (this.collisionRock(this.scissors, rock)) {
@@ -254,7 +259,9 @@ class Game {
         this.paperSound.play();
         paper.removePaper();
         this.score += 1;
-        // console.log("Score:" + this.score);
+        if ((this.score % 25) === 0) {
+          this.startGameSound.play();
+        }
       }
     });
   }
@@ -286,8 +293,8 @@ document.getElementById("startGamebtn").addEventListener("click", () => game.sta
 
 
 
-// Link to background image: https://s22.postimg.cc/5h3h8fqnl/background.png
 // Link to updated background image: https://s22.postimg.cc/791yje2a9/new_BG.png
+// Sound effects downloaded from NoiseForFun.com
 
 
 /***/ }),
@@ -316,8 +323,8 @@ class Paper {
     this.ctx.drawImage(this.image, this.x, this.y);
   }
 
-  updatePaper() {
-    this.y += (this.speed);
+  updatePaper(score) {
+    this.y += (this.speed + Math.floor(score/25));
   }
 
   removePaper() {
@@ -379,8 +386,8 @@ class Rock {
 
   //adds the speed to the vertical direction of rock to make it move down
   // add this.score as argument to incease speed when score goes up
-  updateRock() {
-    this.y += (this.speed);
+  updateRock(score) {
+    this.y += (this.speed + Math.floor(score/25));
   }
 }
 

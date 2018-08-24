@@ -19,8 +19,8 @@ class Rock {
 
   //adds the speed to the vertical direction of rock to make it move down
   // add this.score as argument to incease speed when score goes up
-  updateRock() {
-    this.y += (this.speed);
+  updateRock(score) {
+    this.y += (this.speed + Math.floor(score/25));
   }
 }
 

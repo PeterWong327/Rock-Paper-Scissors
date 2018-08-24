@@ -15,8 +15,8 @@ class Paper {
     this.ctx.drawImage(this.image, this.x, this.y);
   }
 
-  updatePaper() {
-    this.y += (this.speed);
+  updatePaper(score) {
+    this.y += (this.speed + Math.floor(score/25));
   }
 
   removePaper() {
