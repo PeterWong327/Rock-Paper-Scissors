@@ -19,8 +19,8 @@
 
 #startGamebtn {
   display: block;
-  background-color: white;
-  color: black;
+  background-color: #018DF0;
+  color: white;
   padding: 15px 22px;
   font-size: 16px;
   border-radius: 20px;
@@ -31,7 +31,8 @@
 }
 
 #startGamebtn:hover {
-  background-color: #008CFF;
+  background-color: #018DF0;
+  color: black;
 }
 
 #startGamebtn:focus {
@@ -39,19 +40,18 @@
 }
 
 #mute-btn {
-  background-color: white;
-  color: black;
+  background-color: #018DF0;
+  color: white;
   padding: 15px 20px;
   font-size: 16px;
   font-weight: bold;
-  /* font-weight: bold; */
   border-radius: 20px;
   font-family: Comic Sans MS;
-  /* margin-left: 5%; */
 }
 
 #mute-btn:hover {
-  background-color: #008CFF;
+  background-color: #018DF0;
+  color: black;
 }
 
 #mute-btn:focus {
@@ -81,20 +81,23 @@
 }
 
 #linkedin {
-  background-color: darkgray;
-  padding: 10px;
+  /* height: 65px; */
+  margin-left: 25px;
+  display: inline-block;
   text-decoration: none;
-  border-radius: 5px;
+  background-color: transparentl;
 }
 
-#github {
-  background-color: darkgray;
-  padding: 10px;
+#gitHub {
+  margin-left: 25px;
+  display: inline-block;
+  background-color: transparent
   text-decoration: none;
-  border-radius: 5px;
+  /* margin-bottom: 25px; */
 }
 
 body {
+  margin-left: 25px;
   font-family: Comic Sans MS;
   display: block;
   justify-content: center;
