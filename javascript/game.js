@@ -24,15 +24,13 @@ class Game {
   draw () {
     // clearFrame
     // draw everything
-    const background = new Image ();
-    background.src = "https://s22.postimg.cc/791yje2a9/new_BG.png";
-    this.ctx.drawImage(background, 0, 0);
+    // const background = new Image ();
+    // background.src = "https://s22.postimg.cc/791yje2a9/new_BG.png";
+    // this.ctx.drawImage(background, 0, 0);
   }
 
-  //starts a new game and calls the loop function
+  //calls the loop function to start animation
   startGame () {
-    // debugger;
-    // this.game();
     this.loop();
   }
 
@@ -142,9 +140,9 @@ class Game {
     });
 
     //display score
-    this.ctx.font="20px Comic Sans MS";
+    this.ctx.font="28px Comic Sans MS";
     this.ctx.fillStyle = "blue";
-    this.ctx.fillText("Score: " + this.score, 450, 50);
+    this.ctx.fillText("Score: " + this.score, 400, 50);
 
     //check for collision with a rock
     this.rocks.forEach(rock => {
@@ -182,29 +180,12 @@ const music = document.getElementById("bgMusic");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-
+//creates a new instance of a Game
 const game = new Game(ctx);
 
 document.getElementById("startGamebtn").addEventListener("click", () => game.startGame());
 
-// window.addEventListener('click', startGame(gameStart));
 
-
-// const background = new Image ();
-// background.src = "https://s22.postimg.cc/5h3h8fqnl/background.png";
-//
-// background.onload = function() {
-//   ctx.drawImage(background, 0, 0);
-// };
-
-// window.onload = () => {
-//   let scissors = new Scissors(ctx);
-//   let rock = new Rock(ctx);
-//   let paper = new Paper(ctx);
-//     rock.drawRock();
-//     scissors.drawScissors();
-//     paper.drawPaper();
-// };
 
 
 

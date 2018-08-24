@@ -1,3 +1,67 @@
+
+
 #canvas {
   background-image: url("https://s22.postimg.cc/791yje2a9/new_BG.png");
+}
+
+#startGamebtn {
+  background-color: #008CFF;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+#startGamebtn:hover {
+  background-color: #007CEF;
+}
+
+#mute-btn {
+  background-color: #008CFF;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+#mute-btn:hover {
+  background-color: #007CEF;
+}
+
+#instructions {
+  /* margin-left: 15%; */
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#controls {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+#linkedin {
+  background-color: darkgray;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#github {
+  background-color: darkgray;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+body {
+  display: block;
+  justify-content: center;
+  background-color: lightgray;
+}
+
+#title {
+  margin-left: 30%;
+  font-size: 30px;
+  font: #008CFF;
 }
