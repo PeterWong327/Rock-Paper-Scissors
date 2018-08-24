@@ -406,7 +406,6 @@ class Rock {
     this.ctx = ctx;
     this.x = (Math.random() * 490);
     this.y = -56;
-    // this.pos = {x: (Math.random() * 450 + 48), y: -56 };
     this.image = new Image ();
     this.image.src = "https://s15.postimg.cc/3wvz6x8bv/rock.png";
     this.speed = 2;
