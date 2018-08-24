@@ -104,25 +104,19 @@ class Game {
     this.papers = [];
     this.frameCount = 0;
     this.scissors = new Scissors(ctx);
-    this.draw();
     this.score = 0;
     this.playMusic = new Audio("./sounds/bgMusic2.mp3");
     this.rockSound = new Audio("./sounds/gameOver.mp3");
     this.paperSound = new Audio("./sounds/paper.mp3");
     this.startGameSound = new Audio("./sounds/startGame.mp3");
-  }
-
-  draw () {
-    // clearFrame
-    // draw everything
-    // const background = new Image ();
-    // background.src = "https://s22.postimg.cc/791yje2a9/new_BG.png";
-    // this.ctx.drawImage(background, 0, 0);
+    this.toggleSound = true;
   }
 
   //starts or restarts a game
   startGame () {
-    this.startGameSound.play();
+    if (this.toggleSound === true) {
+      this.startGameSound.play();
+    }
     this.rocks = [];
     this.papers = [];
     this.frameCount = 0;
@@ -130,6 +124,22 @@ class Game {
     // this.draw();
     this.score = 0;
     this.loop();
+  }
+
+  clickMute () {
+    if (this.toggleSound === false) {
+      this.toggleSound = true;
+    } else {
+      this.toggleSound = false;
+    }
+  }
+
+  sounds () {
+    if (this.toggleSound === true) {
+      this.playMusic.play();
+    } else {
+      this.playMusic.pause();
+    }
   }
 
   gameOver () {
@@ -188,26 +198,22 @@ class Game {
   }
 
   loop () {
-    this.playMusic.play();
+    this.sounds();
     this.frameCount += (1 + Math.floor(this.score/25));
     if (this.frameCount > 50) {
       Math.random() > 0.5 ? (this.createPaperRow()) : this.createRockRow();
       this.frameCount = 0;
     }
-
     this.frame = requestAnimationFrame(this.loop.bind(this));
     //update: calls update method from rock and paper
     this.rocks.forEach(rock => {
       //add this.score as argument to use for speed increment
       rock.updateRock(this.score);
     });
-
     this.papers.forEach(paper => {
       paper.updatePaper(this.score);
     });
-
     this.ctx.clearRect(0,0,550, 650);
-
 
     //draw background
     const background = new Image ();
@@ -245,48 +251,77 @@ class Game {
 
     //check for collision with a rock
     this.rocks.forEach(rock => {
-      if (this.collisionRock(this.scissors, rock)) {
-        // console.log("collision with rock!");
-        // setTimeout(this.gameOver(), 1000);
+      if (this.collisionRock(this.scissors, rock) && (this.toggleSound === true)) {
         this.rockSound.play();
+        this.gameOver();
+      } else if (this.collisionRock(this.scissors, rock)) {
         this.gameOver();
       }
     });
 
     //check for collision with a paper
     this.papers.forEach(paper => {
-      if (this.collision(this.scissors, paper)) {
+      if (this.collision(this.scissors, paper) && (this.toggleSound === true)) {
         this.paperSound.play();
         paper.removePaper();
         this.score += 1;
-        if ((this.score % 25) === 0) {
+        if ((this.score % 25) === 0 && (this.toggleSound === true)) {
           this.startGameSound.play();
         }
+      } else if (this.collision(this.scissors, paper)) {
+        paper.removePaper();
+        this.score += 1;
       }
     });
   }
 }
 
+//starts game with spacebar
+window.addEventListener('keydown', startGame);
+
+function startGame(e) {
+  let code = e.keyCode;
+  if (code === 32) {
+    game.startGame();
+  }
+}
+
+window.addEventListener('keydown', muteButton);
+
+function muteButton(e) {
+  let code = e.keyCode;
+  if (code === 16) {
+    game.clickMute();
+  }
+}
+
+//sets key presses to activate moveScissors
 window.addEventListener('keydown', moveScissors);
 
 function moveScissors(e) {
   let code = e.keyCode;
+  //if left key pressed
   if (code === 37){
     game.scissors.moveScissors(-4, 0);
+    //if right key pressed
   } else if (code === 39) {
     game.scissors.moveScissors(4, 0);
   }
 }
 
+//Load music and canvas
 const music = document.getElementById("bgMusic");
-
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 //creates a new instance of a Game
 const game = new Game(ctx);
 
+//starts game on click
 document.getElementById("startGamebtn").addEventListener("click", () => game.startGame());
+
+//toggles mute button on/off on click
+document.getElementById("mute-btn").addEventListener("click", () => game.clickMute());
 
 
 

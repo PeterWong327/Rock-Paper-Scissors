@@ -26,7 +26,7 @@
   border-radius: 20px;
   font-weight: bold;
   margin-top: 5%;
-  margin-left: 5%;
+  /* margin-left: 5%; */
   font-family: Comic Sans MS;
 }
 
@@ -34,19 +34,28 @@
   background-color: #008CFF;
 }
 
+#startGamebtn:focus {
+  outline: 0;
+}
+
 #mute-btn {
   background-color: white;
   color: black;
-  padding: 15px 22px;
+  padding: 15px 20px;
   font-size: 16px;
+  font-weight: bold;
   /* font-weight: bold; */
   border-radius: 20px;
   font-family: Comic Sans MS;
-  margin-left: 5%;
+  /* margin-left: 5%; */
 }
 
 #mute-btn:hover {
   background-color: #008CFF;
+}
+
+#mute-btn:focus {
+  outline: 0;
 }
 
 #instructions {
@@ -59,6 +68,7 @@
   font-weight: bold;
   border-radius: 20px;
   text-align: left;
+  /* margin-left: 5%; */
 }
 
 #controls {
