@@ -6,19 +6,15 @@ class Game {
   constructor(ctx) {
     this.ctx = ctx;
     this.rocks = [];
-    // this.createRockRow();
     this.papers = [];
-    // this.createPaperRow();
     this.frameCount = 0;
     this.scissors = new Scissors(ctx);
-    // this.loop();
     this.draw();
     this.score = 0;
-    // this.playMusic();
-  }
-
-  playMusic () {
-    music.play();
+    this.playMusic = new Audio("./sounds/bgMusic2.mp3");
+    this.rockSound = new Audio("./sounds/rockHit.mp3");
+    this.paperSound = new Audio("./sounds/startGame.mp3");
+    this.startGameSound = new Audio("./sounds/startGame.mp3");
   }
 
   draw () {
@@ -29,8 +25,15 @@ class Game {
     // this.ctx.drawImage(background, 0, 0);
   }
 
-  //calls the loop function to start animation
+  //starts or restarts a game
   startGame () {
+    this.startGameSound.play();
+    this.rocks = [];
+    this.papers = [];
+    this.frameCount = 0;
+    this.scissors = new Scissors(ctx);
+    this.draw();
+    this.score = 0;
     this.loop();
   }
 
@@ -39,9 +42,8 @@ class Game {
     this.ctx.fillStyle = "red";
     this.ctx.fillText("GAME OVER", 175, 280);
     cancelAnimationFrame(this.frame);
-    // this.score = 0;
+    this.playMusic.pause();
   }
-
 
   createRockRow (){
     let prevRock = 0;
@@ -86,16 +88,13 @@ class Game {
       obj1.x + obj1.width > obj2.x &&
       obj1.y < obj2.y + obj2.height &&
       obj1.y + obj1.height > obj2.y) {
-
-      // console.log("collision SUCCESS!!");
       return true;
+    }
   }
-}
 
   loop () {
+    this.playMusic.play();
     this.frameCount += 1;
-    // console.log(this.frameCount);
-    // if ((this.frameCount * this.rocks[0].speed) >= 55) {
     if (this.frameCount > 50) {
       Math.random() > 0.5 ? (this.createPaperRow()) : this.createRockRow();
       this.frameCount = 0;
@@ -149,6 +148,7 @@ class Game {
       if (this.collisionRock(this.scissors, rock)) {
         // console.log("collision with rock!");
         // setTimeout(this.gameOver(), 1000);
+        this.rockSound.play();
         this.gameOver();
       }
     });
@@ -156,6 +156,7 @@ class Game {
     //check for collision with a paper
     this.papers.forEach(paper => {
       if (this.collision(this.scissors, paper)) {
+        this.paperSound.play();
         paper.removePaper();
         this.score += 1;
         // console.log("Score:" + this.score);
