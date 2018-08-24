@@ -36,8 +36,7 @@ This game will consist of a single screen with the simulation canvas along with 
 - [x] Setup required files within project folder: HTML and JavaScript
 - [x] Save images and sounds into project folder
 
-**Day 1:** Implement code to make background scroll from top to bottom, along with generating obstacles (rocks and papers) randomly. Goals for the day:
-- [ ] Learn how to scroll the background and implement a continuous loop for the scroll
+**Day 1:** Implement code to generate obstacles (rocks and papers) randomly. Goals for the day:
 - [x] Learn how to randomly generate the rocks and papers and have them scroll down the screen
 
 **Day 2:** Implement ability for user to move pair of scissors left and right. Goals for the day:
@@ -46,11 +45,11 @@ This game will consist of a single screen with the simulation canvas along with 
 
 **Day 3:** Implement collision detection for scissors and obstacles. Goals for the day:
 - [x] Set up collision detection for scissors and rocks: game over
-- [ ] Create and display a counter to show total points
+- [x] Create and display a counter to show total points
 - [x] Set up collision detection for scissors and papers: +1 to the points
 
 **Day 4:** Implement music/sound effects, and style the frontend. Goals for the day:
-- [ ] Add music to the game when the game is started
-- [ ] Make a unique sound effect for different types of collisions
-- [ ] Create mute functionality with button
-- [ ] Add instructions to the game page
+- [x] Add music to the game when the game is started
+- [x] Make a unique sound effect for different types of collisions
+- [x] Create mute functionality with button
+- [x] Add instructions to the game page
