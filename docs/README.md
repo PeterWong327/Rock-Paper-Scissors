@@ -6,11 +6,11 @@ Rock Paper Scissors is an endless running-style game in which a player controls 
 ### MVP Features
 In Rock Paper Scissors, users will be able to:
 
-- [ ] Control a pair of scissors by moving it left and right
-- [ ] Collect points for 'cutting' through paper obstacles
-- [ ] Lose the game on collision with a rock
-- [ ] Hear background music and collision sounds
-- [ ] Start a game and restart after losing
+- [x] Control a pair of scissors by moving it left and right
+- [x] Collect points for 'cutting' through paper obstacles
+- [x] Lose the game on collision with a rock
+- [x] Hear background music and collision sounds
+- [x] Start a game and restart after losing
 
 ### Technologies
 Rock Paper Scissors will be implemented using JavaScript and HTML5 Canvas.
