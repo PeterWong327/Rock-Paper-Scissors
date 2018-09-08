@@ -14,11 +14,13 @@ class Game {
     this.rockSound = new Audio("./sounds/gameOver.mp3");
     this.paperSound = new Audio("./sounds/paper.mp3");
     this.startGameSound = new Audio("./sounds/startGame.mp3");
-    this.toggleSound = true;
+    this.toggleSound = false;
   }
 
   //starts or restarts a game
   startGame () {
+    this.playMusic.pause();
+    this.toggleSound = false;
     if (this.toggleSound === true) {
       this.startGameSound.play();
     }
