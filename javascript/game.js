@@ -50,7 +50,7 @@ class Game {
   }
 
   gameOver () {
-    this.ctx.font="50px Comic Sans MS";
+    this.ctx.font="40px Comic Sans MS";
     this.ctx.fillStyle = "red";
     this.ctx.fillText("GAME OVER", 175, 280);
     cancelAnimationFrame(this.frame);
