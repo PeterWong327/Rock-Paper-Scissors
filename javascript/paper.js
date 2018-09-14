@@ -6,7 +6,7 @@ class Paper {
     this.y = -56;
     this.image = new Image ();
     this.image.src = "https://s22.postimg.cc/cvst0f79t/paper.png";
-    this.speed = 2;
+    this.speed = 4;
     this.height = 54;
     this.width = 54;
   }

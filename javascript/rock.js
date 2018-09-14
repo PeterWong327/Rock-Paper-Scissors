@@ -6,7 +6,7 @@ class Rock {
     this.y = -56;
     this.image = new Image ();
     this.image.src = "https://s15.postimg.cc/3wvz6x8bv/rock.png";
-    this.speed = 2;
+    this.speed = 4;
     this.width = 52;
     this.height = 48;
   }
